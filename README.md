@@ -5,8 +5,9 @@
 2. 所以帮忙给朋友看了一下， 简单的记录了一下优化流程。
 
 ### Let`s do it
-> * bundle 未丑化（压缩混淆）
->   > `
+> * 1.bundle 未丑化（压缩混淆）
+>   >
+```
     ...
     //引入webpack
     var webpack = require('webpack');
@@ -33,5 +34,36 @@
                 ie8:false
             }),
         ],
-`
+```
+
+> * 2.react未启用生产版本
+>   >
+```
+    ...
+    //添加插件启用生产版本react
+    plugins:[
+            ...
+             new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': JSON.stringify('production')
+                    }),
+        ],
+```
+
+> * 3.添加打包分析插件，分析bundle组成
+>   >
+```
+    //npm install --save-dev webpack-bundle-analyzer
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    ...
+    //添加分析插件
+    plugins:[
+            ...
+             new BundleAnalyzerPlugin(),
+        ],
+    //在运行打包命令时 会监听127.0.0.1:8888，可查看具体bundle组成
+    //在优化了前两项之后 bundle在1.04m，运行分析后发现项目里用了jquery的$.ajax，- - mmp ，
+    //将jquery包去除引用 最终bundle在 800K，
+```
+
+### ...待续
 
