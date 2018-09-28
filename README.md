@@ -61,6 +61,7 @@
              new BundleAnalyzerPlugin(),
         ],
     //在运行打包命令时 会监听127.0.0.1:8888，可查看具体bundle组成
+    //在优化了前两项之后 bundle在1.04m，运行分析后发现项目里用了jquery的$.ajax，- - mmp ，
 
 ```
 
@@ -83,8 +84,8 @@
                 },
             ],
         },
-   //在优化了前两项之后 bundle在1.04m，运行分析后发现项目里用了jquery的$.ajax，- - mmp ，
-   //将jquery包去除引用 最终bundle+css文件大小在 800K左右。
+
+   //最终bundle+css文件大小在 800K左右。
 ```
 ### ...待续
 
